@@ -1,9 +1,3 @@
-# cardiovascular-risk-prediction-datarobot
-Aplicación web desarrollada en Python y Streamlit que permite estimar el riesgo de enfermedad cardiovascular mediante un modelo de Machine Learning desplegado en DataRobot.
-# **🫀 Predicción de Riesgo Cardiovascular con DataRobot**
-
-Aplicación web desarrollada en **Python** y **Streamlit** que permite estimar el riesgo de enfermedad cardiovascular utilizando un modelo de **Machine Learning desplegado en DataRobot**.
-
 🫀 Cardiovascular Risk Prediction with DataRobot
 
 Aplicación web desarrollada en Python y Streamlit que permite estimar el riesgo de enfermedad cardiovascular mediante un modelo de Machine Learning desplegado en DataRobot.
@@ -340,4 +334,3 @@ Explainable AI
 Lilliana Uribe
 Proyecto académico de Machine Learning y DataRobot
 """
-
