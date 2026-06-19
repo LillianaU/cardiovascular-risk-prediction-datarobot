@@ -4,343 +4,340 @@ Aplicación web desarrollada en Python y Streamlit que permite estimar el riesgo
 
 Aplicación web desarrollada en **Python** y **Streamlit** que permite estimar el riesgo de enfermedad cardiovascular utilizando un modelo de **Machine Learning desplegado en DataRobot**.
 
----
-
-# **📋 Tabla de Contenido**
-
-* Descripción  
-* Arquitectura  
-* Características  
-* Tecnologías  
-* Estructura del Proyecto  
-* Instalación  
-* Configuración  
-* Ejecución  
-* Variables del Modelo  
-* Resultados  
-* Futuras Mejoras  
-* Autor
-
----
-
-# **📖 Descripción**
-
-La aplicación captura información clínica de un paciente, calcula automáticamente el **Índice de Masa Corporal (IMC)** y envía los datos a un modelo desplegado en **DataRobot** para generar una predicción de riesgo cardiovascular.
-
-## **Variables Analizadas**
-
-* Edad  
-* Género  
-* Estatura  
-* Peso  
-* Índice de Masa Corporal (IMC)  
-* Presión Sistólica  
-* Presión Diastólica  
-* Colesterol  
-* Glucosa  
-* Consumo de Tabaco  
-* Consumo de Alcohol  
-* Actividad Física
-
----
-
-# **🏗️ Arquitectura**
-
-## **Diagrama de Arquitectura (PlantUML)**
-
-@startuml
-
-skinparam componentStyle rectangle
-
-actor Usuario
-
-rectangle "Streamlit UI\\n(app.py)" as APP  
-rectangle "Prediction Service\\n(predict.py)" as PRED  
-database "CSV Temporal" as CSV  
-cloud "DataRobot Deployment" as DR
-
-Usuario \--\> APP : Ingresa datos clínicos
-
-APP \--\> CSV : Genera CSV  
-APP \--\> PRED : Ejecuta proceso
-
-PRED \--\> DR : Solicita predicción  
-DR \--\> PRED : Resultado
-
-PRED \--\> APP : Probabilidad y clasificación
-
-APP \--\> Usuario : Mostrar resultado
-
-@enduml  
----
-
-## **Flujo de Predicción**
-
-@startuml
-
-start
-
-:Capturar datos clínicos;
-
-:Calcular IMC;
-
-:Validar presión arterial;
-
-if (Datos válidos?) then (Sí)
-
-:Crear CSV temporal;
-
-:Ejecutar predict.py;
-
-:Enviar datos a DataRobot;
-
-:Obtener resultado;
-
-:Mostrar probabilidad;
-
-:Mostrar clasificación;
-
-else (No)
-
-:Mostrar error;
-
-endif
-
-stop
-
-@enduml  
----
-
-# **✨ Características**
-
-* ✅ Interfaz amigable desarrollada con Streamlit.  
-* ✅ Cálculo automático del IMC.  
-* ✅ Validación de datos clínicos.  
-* ✅ Integración con DataRobot.  
-* ✅ Predicción en tiempo real.  
-* ✅ Visualización de probabilidades.  
-* ✅ Gestión automática de archivos temporales.  
-* ✅ Arquitectura desacoplada entre interfaz y servicio de predicción.
-
----
-
-# **🚀 Tecnologías**
-
-### **🐍 Lenguaje Principal**
-
-### **🎈 Desarrollo Web**
-
-### **📊 Procesamiento de Datos**
-
-### **🤖 Inteligencia Artificial**
-
-### **📄 Formato de Datos**
-
-\# 🚀 Tecnologías
-
-\#\# 🐍 Lenguaje Principal
-
-\<p align="left"\>  
-  \<img src="https://skillicons.dev/icons?i=python" height="60" alt="Python"/\>  
-\</p\>
-
-\!\[Python\](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-
-\---
-
-\#\# 🎈 Desarrollo Web
-
-\<p align="left"\>  
-  \<img src="https://skillicons.dev/icons?i=streamlit" height="60" alt="Streamlit"/\>  
-\</p\>
-
-\!\[Streamlit\](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge\&logo=streamlit\&logoColor=white)
-
-\---
-
-\#\# 📊 Procesamiento de Datos
-
-\<p align="left"\>  
-  \<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" height="60" alt="Pandas"/\>  
-\</p\>
-
-\!\[Pandas\](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white)
-
-\---
-
-\#\# 🤖 Inteligencia Artificial
-
-\<p align="left"\>  
-  \<img src="https://cdn.simpleicons.org/datarobot" height="60" alt="DataRobot"/\>  
-\</p\>
-
-\!\[DataRobot\](https://img.shields.io/badge/DataRobot-Batch\_Predictions-orange?style=for-the-badge)
-
-\!\[Machine Learning\](https://img.shields.io/badge/Machine\_Learning-Predictive\_Model-green?style=for-the-badge)
-
-\---
-
-\#\# 📄 Formato de Datos
-
-\<p align="left"\>  
-  \<img src="https://cdn-icons-png.flaticon.com/512/6133/6133884.png" height="60" alt="CSV"/\>  
-\</p\>
-
-\!\[CSV\](https://img.shields.io/badge/CSV-Input\_Output\_Data-lightgrey?style=for-the-badge)
-
-\---
-
-\#\# 🏆 Stack Tecnológico
-
-\<p align="center"\>  
-  \<img src="https://skillicons.dev/icons?i=python,streamlit" /\>  
-\</p\>
-
-\<p align="center"\>  
-  \<img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas\&logoColor=white"/\>  
-  \<img src="https://img.shields.io/badge/DataRobot-FF6F00?style=for-the-badge"/\>  
-  \<img src="https://img.shields.io/badge/Machine\_Learning-AI-success?style=for-the-badge"/\>  
-  \<img src="https://img.shields.io/badge/CSV-Data\_File-lightgrey?style=for-the-badge"/\>  
-\</p\>
-
----
-
-# **📁 Estructura del Proyecto**
-
-cardiovascular-risk-app/  
-│  
-├── app.py  
-├── predict.py  
-├── requirements.txt  
-├── README.md  
-│  
-└── .streamlit/  
+🫀 Cardiovascular Risk Prediction with DataRobot
+
+Aplicación web desarrollada en Python y Streamlit que permite estimar el riesgo de enfermedad cardiovascular mediante un modelo de Machine Learning desplegado en DataRobot.
+
+El sistema captura variables clínicas del paciente, calcula automáticamente el Índice de Masa Corporal (IMC) y genera una predicción en tiempo real del riesgo cardiovascular.
+
+📋 Tabla de Contenido
+📖 Descripción
+🏗️ Arquitectura
+🔄 Flujo de Predicción
+✨ Características
+🚀 Tecnologías
+📁 Estructura del Proyecto
+⚙️ Instalación
+🔐 Configuración
+▶️ Ejecución
+📊 Variables del Modelo
+📈 Resultados
+🔮 Futuras Mejoras
+👩‍💻 Autor
+📖 Descripción
+
+La aplicación permite ingresar datos clínicos de un paciente, calcular automáticamente indicadores como el IMC y enviar la información a un modelo de DataRobot para obtener una predicción del riesgo cardiovascular.
+
+Variables analizadas:
+
+Edad
+Género
+Estatura
+Peso
+IMC
+Presión sistólica
+Presión diastólica
+Colesterol
+Glucosa
+Consumo de tabaco
+Consumo de alcohol
+Actividad física
+🏗️ Arquitectura
+🧠 Diagrama de Arquitectura
+
+📌 (Recomendado: usar imagen exportada)
+
+![Arquitectura del sistema](docs/diagrams/arquitectura.png)
+🧩 Versión alternativa (Mermaid GitHub)
+flowchart LR
+    U[Usuario] --> A[Streamlit UI - app.py]
+    A --> C[CSV Temporal]
+    A --> P[predict.py]
+    P --> D[DataRobot Deployment]
+    D --> P
+    P --> A
+    A --> U
+🔄 Flujo de Predicción
+📌 Diagrama del proceso
+![Flujo de predicción](docs/diagrams/flujo.png)
+🧩 Versión Mermaid (recomendada para GitHub)
+flowchart TD
+    A[Capturar datos clínicos]
+    B[Calcular IMC]
+    C{Datos válidos?}
+    D[Crear CSV temporal]
+    E[Enviar a DataRobot]
+    F[Obtener resultado]
+    G[Mostrar probabilidad y clasificación]
+    H[Mostrar error]
+
+    A --> B --> C
+    C -->|Sí| D --> E --> F --> G
+    C -->|No| H
+✨ Características
+✅ Interfaz amigable con Streamlit
+🧮 Cálculo automático de IMC
+🔎 Validación de datos clínicos
+🤖 Integración con DataRobot API
+⚡ Predicción en tiempo real
+📊 Visualización de probabilidad de riesgo
+🧹 Manejo de archivos temporales
+🧱 Arquitectura desacoplada
+🚀 Tecnologías
+🐍 Lenguaje principal
+Python
+🎈 Desarrollo web
+Streamlit
+📊 Procesamiento de datos
+Pandas
+🤖 Inteligencia Artificial
+DataRobot
+Machine Learning
+📄 Formato de datos
+CSV
+📁 Estructura del Proyecto
+cardiovascular-risk-app/
+│
+├── app.py
+├── predict.py
+├── requirements.txt
+├── README.md
+│
+└── .streamlit/
     └── secrets.toml
-
-## **Estructura UML**
-
-@startmindmap
-
-\* Cardiovascular Risk App  
-\*\* app.py  
-\*\*\* Interfaz Streamlit  
-\*\*\* Captura Datos  
-\*\*\* Cálculo IMC  
-\*\*\* Validaciones
-
-\*\* predict.py  
-\*\*\* Batch Prediction API  
-\*\*\* Comunicación DataRobot  
-\*\*\* Descarga Resultados
-
-\*\* requirements.txt
-
-\*\* README.md
-
-\*\* .streamlit  
-\*\*\* secrets.toml
-
-@endmindmap  
----
-
-# **⚙️ Instalación**
-
-## **1\. Clonar el repositorio**
-
-git clone https://github.com/usuario/cardiovascular-risk-app.git  
+⚙️ Instalación
+1️⃣ Clonar repositorio
+git clone https://github.com/usuario/cardiovascular-risk-app.git
 cd cardiovascular-risk-app
+2️⃣ Crear entorno virtual
+python -m venv venv
 
-## **2\. Crear entorno virtual**
+Activar:
 
-python \-m venv venv
+Windows:
 
-### **Windows**
+venv\Scripts\activate
 
-venv\\Scripts\\activate
-
-### **Linux / Mac**
+Mac/Linux:
 
 source venv/bin/activate
+3️⃣ Instalar dependencias
+pip install -r requirements.txt
+🔐 Configuración
 
-## **3\. Instalar dependencias**
-
-pip install \-r requirements.txt  
----
-
-# **🔐 Configuración**
-
-Crear el archivo:
+Crear archivo:
 
 .streamlit/secrets.toml
 
 Contenido:
 
-DATAROBOT\_API\_KEY="TU\_API\_KEY"  
-DATAROBOT\_DEPLOYMENT\_ID="TU\_DEPLOYMENT\_ID"  
-DATAROBOT\_HOST="https://app.datarobot.com"  
----
+DATAROBOT_API_KEY="TU_API_KEY"
+DATAROBOT_DEPLOYMENT_ID="TU_DEPLOYMENT_ID"
+DATAROBOT_HOST="https://app.datarobot.com"
+▶️ Ejecución
+streamlit run app.py
+📊 Variables del Modelo
+Variable	Tipo
+genero	Numérica
+edad_anios	Numérica
+estatura_cm	Numérica
+peso_kg	Numérica
+indice_masa_corporal	Numérica
+presion_sistolica	Numérica
+presion_diastolica	Numérica
+colesterol	Categórica
+glucosa	Categórica
+fuma	Binaria
+consume_alcohol	Binaria
+actividad_fisica	Binaria
+📈 Resultados
 
-# **▶️ Ejecución**
+La aplicación retorna:
 
-streamlit run app.py  
----
-
-# **📊 Variables del Modelo**
-
-| Variable | Tipo |
-| ----- | ----- |
-| genero | Numérica |
-| edad\_anios | Numérica |
-| estatura\_cm | Numérica |
-| peso\_kg | Numérica |
-| indice\_masa\_corporal | Numérica |
-| presion\_sistolica | Numérica |
-| presion\_diastolica | Numérica |
-| colesterol | Categórica |
-| glucosa | Categórica |
-| fuma | Binaria |
-| consume\_alcohol | Binaria |
-| actividad\_fisica | Binaria |
-
----
-
-# **📈 Resultado**
-
-La aplicación devuelve:
-
-* Probabilidad de enfermedad cardiovascular.  
-* Clasificación binaria del riesgo.  
-* Respuesta completa del modelo desplegado.
-
-### **Ejemplo**
-
+📊 Probabilidad de riesgo cardiovascular
+🧠 Clasificación (alto / bajo riesgo)
+📄 Respuesta del modelo DataRobot
+Ejemplo:
 Probabilidad: 84.35%
+Resultado: Alto riesgo cardiovascular
+🔮 Futuras Mejoras
+📊 Dashboard analítico avanzado
+🧾 Historial de pacientes
+🗄️ Integración con base de datos
+🔐 Autenticación de usuarios
+🐳 Dockerización del proyecto
+☁️ Despliegue en la nube
+🧠 Explainable AI (XAI)
+🌐 DataRobot
 
-Predicción:  
-Posible enfermedad cardiovascular  
+🔗 https://app.datarobot.com/homepage/main
+
+👩‍💻 Autor
+
+Lilliana Uribe
+Proyecto académico enfocado en Machine Learning, Analítica Predictiva y despliegue de modelos con DataRobot y Streamlit.
+
+🚀 Si quieres siguiente nivel
+
+Puedo ayudarte a convertir esto en:
+
+README tipo empresa (IBM / Google style)
+versión con banner + logo + portada visual
+README optimizado para portafolio LinkedIn
+o repositorio listo para entrevista técnica
+
+Solo dime 👍
+
+crea el documento para descargar .md
+Analizado
+# Create README.md file content
+
+content = """# 🫀 Cardiovascular Risk Prediction with DataRobot
+
+Aplicación web desarrollada en **Python y Streamlit** que permite estimar el riesgo de enfermedad cardiovascular mediante un modelo de **Machine Learning desplegado en DataRobot**.
+
+El sistema captura variables clínicas del paciente, calcula automáticamente el **Índice de Masa Corporal (IMC)** y genera una predicción en tiempo real del riesgo cardiovascular.
+
 ---
 
-# **🔮 Futuras Mejoras**
+# 📋 Tabla de Contenido
 
-* Dashboard de analítica avanzada.  
-* Historial de pacientes.  
-* Integración con bases de datos.  
-* Autenticación de usuarios.  
-* Dockerización de la aplicación.  
-* Despliegue en la nube.  
-* Explicabilidad del modelo (Explainable AI).
+- 📖 Descripción
+- 🏗️ Arquitectura
+- 🔄 Flujo de Predicción
+- ✨ Características
+- 🚀 Tecnologías
+- 📁 Estructura del Proyecto
+- ⚙️ Instalación
+- 🔐 Configuración
+- ▶️ Ejecución
+- 📊 Variables del Modelo
+- 📈 Resultados
+- 🔮 Futuras Mejoras
+- 👩‍💻 Autor
 
 ---
 
-# **🌐 DataRobot**
+# 📖 Descripción
 
-[https://app.datarobot.com/homepage/main](https://app.datarobot.com/homepage/main)
+La aplicación permite ingresar datos clínicos de un paciente, calcular automáticamente indicadores como el IMC y enviar la información a un modelo de DataRobot para obtener una predicción del riesgo cardiovascular.
+
+Variables analizadas:
+- Edad
+- Género
+- Estatura
+- Peso
+- IMC
+- Presión sistólica
+- Presión diastólica
+- Colesterol
+- Glucosa
+- Consumo de tabaco
+- Consumo de alcohol
+- Actividad física
 
 ---
 
-# **👩‍💻 Autor**
+# 🏗️ Arquitectura
 
-**Lilliana Uribe**
+## 🧠 Diagrama de Arquitectura
 
-Proyecto académico enfocado en Machine Learning, Analítica Predictiva y despliegue de modelos utilizando DataRobot y Streamlit.
+```mermaid
+flowchart LR
+    U[Usuario] --> A[Streamlit UI - app.py]
+    A --> C[CSV Temporal]
+    A --> P[predict.py]
+    P --> D[DataRobot Deployment]
+    D --> P
+    P --> A
+    A --> U
+🔄 Flujo de Predicción
+✨ Características
+Interfaz amigable con Streamlit
+Cálculo automático de IMC
+Validación de datos clínicos
+Integración con DataRobot API
+Predicción en tiempo real
+Visualización de resultados
+Manejo de archivos temporales
+Arquitectura desacoplada
+🚀 Tecnologías
+Python
+Streamlit
+Pandas
+DataRobot
+Machine Learning
+CSV
+📁 Estructura del Proyecto
+
+cardiovascular-risk-app/
+│
+├── app.py
+├── predict.py
+├── requirements.txt
+├── README.md
+│
+└── .streamlit/
+└── secrets.toml
+
+⚙️ Instalación
+
+git clone https://github.com/usuario/cardiovascular-risk-app.git
+cd cardiovascular-risk-app
+
+python -m venv venv
+
+venv\Scripts\activate # Windows
+source venv/bin/activate # Mac/Linux
+
+pip install -r requirements.txt
+
+🔐 Configuración
+
+Crear archivo:
+.streamlit/secrets.toml
+
+DATAROBOT_API_KEY="TU_API_KEY"
+DATAROBOT_DEPLOYMENT_ID="TU_DEPLOYMENT_ID"
+DATAROBOT_HOST="https://app.datarobot.com"
+
+▶️ Ejecución
+
+streamlit run app.py
+
+📊 Variables del Modelo
+genero
+edad_anios
+estatura_cm
+peso_kg
+indice_masa_corporal
+presion_sistolica
+presion_diastolica
+colesterol
+glucosa
+fuma
+consume_alcohol
+actividad_fisica
+📈 Resultados
+Probabilidad de riesgo cardiovascular
+Clasificación del riesgo
+Respuesta del modelo
+
+Ejemplo:
+Probabilidad: 84.35%
+Resultado: Alto riesgo cardiovascular
+
+🔮 Futuras Mejoras
+Dashboard analítico
+Historial de pacientes
+Base de datos
+Autenticación
+Dockerización
+Despliegue en la nube
+Explainable AI
+👩‍💻 Autor
+
+Lilliana Uribe
+Proyecto académico de Machine Learning y DataRobot
+"""
 
