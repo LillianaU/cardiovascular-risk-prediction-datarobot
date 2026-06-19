@@ -47,38 +47,105 @@ La aplicación permite a profesionales de la salud ingresar datos clínicos de u
 - Consumo de tabaco (binario)
 - Consumo de alcohol (binario)
 - Actividad física (binario)
-🏗️ Arquitectura
-🧠 Diagrama de Arquitectura
+## 🏗️ Arquitectura
 
-📌 (Recomendado: usar imagen exportada)
+### 🧠 Diagrama de Arquitectura
 
-![Arquitectura del sistema](docs/diagrams/arquitectura.png)
-🧩 Versión alternativa (Mermaid GitHub)
+**Imagen del repositorio:**
+
+[![Arquitectura del Sistema](https://github.com/LillianaU/cardiovascular-risk-prediction-datarobot/raw/main/docs/diagrams/arquitectura.png)](https://github.com/LillianaU/cardiovascular-risk-prediction-datarobot/blob/main/docs/diagrams/arquitectura.png)
+
+**Versión interactiva (Mermaid para GitHub):**
+
+```mermaid
 flowchart LR
-    U[Usuario] --> A[Streamlit UI - app.py]
-    A --> C[CSV Temporal]
-    A --> P[predict.py]
-    P --> D[DataRobot Deployment]
-    D --> P
-    P --> A
-    A --> U
-🔄 Flujo de Predicción
-📌 Diagrama del proceso
-![Flujo de predicción](docs/diagrams/flujo.png)
-🧩 Versión Mermaid (recomendada para GitHub)
-flowchart TD
-    A[Capturar datos clínicos]
-    B[Calcular IMC]
-    C{Datos válidos?}
-    D[Crear CSV temporal]
-    E[Enviar a DataRobot]
-    F[Obtener resultado]
-    G[Mostrar probabilidad y clasificación]
-    H[Mostrar error]
+    U["👤 Usuario"] 
+    A["Streamlit UI<br/>app.py"]
+    V["Validación<br/>de datos"]
+    C["CSV<br/>Temporal"]
+    P["predict.py<br/>Lógica ML"]
+    D["DataRobot API<br/>Deployment"]
+    R["Predicción<br/>Resultado"]
+    
+    U -->|Ingresar datos| A
+    A -->|Procesar| V
+    V -->|Validar| C
+    C -->|Enviar| P
+    P -->|Consultar| D
+    D -->|Respuesta| R
+    R -->|Mostrar| A
+    A -->|Resultado| U
+    
+    style U fill:#e1f5ff
+    style A fill:#fff3e0
+    style D fill:#f3e5f5
+    style R fill:#e8f5e9
+```
 
-    A --> B --> C
-    C -->|Sí| D --> E --> F --> G
+### Componentes principales
+
+| Componente | Tecnología | Responsabilidad |
+|-----------|-----------|------------------|
+| **Frontend** | Streamlit | Interfaz de usuario y captura de datos |
+| **Backend** | Python | Lógica de validación y procesamiento |
+| **ML Model** | DataRobot API | Predicciones de riesgo cardiovascular |
+| **Storage** | CSV | Almacenamiento temporal de datos |
+
+---
+
+## 🔄 Flujo de Predicción
+
+### 📋 Diagrama del Proceso
+
+**Imagen del repositorio:**
+
+[![Flujo de Predicción](https://github.com/LillianaU/cardiovascular-risk-prediction-datarobot/raw/main/docs/diagrams/flujo.png)](https://github.com/LillianaU/cardiovascular-risk-prediction-datarobot/blob/main/docs/diagrams/flujo.png)
+
+**Versión interactiva (Mermaid - Recomendado para GitHub):**
+
+```mermaid
+flowchart TD
+    A["1️⃣ Capturar datos clínicos<br/>Edad, peso, altura, etc."]
+    B["2️⃣ Validar entrada<br/>Rango y formato"]
+    C{"3️⃣ ¿Datos válidos?"}
+    D["4️⃣ Calcular IMC<br/>peso / altura²"]
+    E["5️⃣ Crear CSV temporal<br/>Preparar payload"]
+    F["6️⃣ Consultar DataRobot API<br/>Enviar predicción"]
+    G["7️⃣ Procesar respuesta<br/>Probabilidad + Clasificación"]
+    I["8️⃣ Mostrar resultado<br/>✅ Resultado final"]
+    H["❌ Error<br/>Validar campos requeridos"]
+    J["Limpiar archivos<br/>Temporales"]
+    
+    A --> B
+    B --> C
+    C -->|Sí| D
     C -->|No| H
+    D --> E
+    E --> F
+    F --> G
+    G --> I
+    I --> J
+    H --> J
+    
+    style A fill:#e3f2fd
+    style C fill:#fff9c4
+    style I fill:#c8e6c9
+    style H fill:#ffcdd2
+    style J fill:#f5f5f5
+```
+
+### Detalles del flujo
+
+| Paso | Descripción | Validación | Salida |
+|------|-----------|-----------|--------|
+| 1 | Captura de datos clínicos | Campos requeridos | Diccionario de datos |
+| 2 | Validación de entrada | Rangos, tipos, unidades | Datos validados |
+| 3 | Control de calidad | ¿Todos los datos son correctos? | Decisión (Sí/No) |
+| 4 | Cálculo automático | IMC = peso / (altura²) | IMC calculado |
+| 5 | Preparación de datos | Formato CSV | Archivo temporal |
+| 6 | Llamada API | Conexión a DataRobot | Respuesta JSON |
+| 7 | Procesamiento de resultado | Extraer probabilidad | Predicción final |
+| 8 | Presentación | Formato visual | Resultado a usuario |
 ✨ Características
 ✅ Interfaz amigable con Streamlit
 🧮 Cálculo automático de IMC
@@ -548,9 +615,8 @@ Este proyecto está bajo la licencia MIT. Ver archivo [LICENSE](LICENSE) para m�
 
 **Lilliana Uribe**
 
-- GitHub: [@lilliana-uribe](https://github.com/lilliana-uribe)
-- Email: lilliana@example.com
-- LinkedIn: [Perfil LinkedIn](https://linkedin.com/in/lilliana-uribe)
+- GitHub: [@lillianau](https://github.com/lillianau)
+
 
 ### Sobre este proyecto
 
@@ -585,6 +651,12 @@ Gracias a:
 
 <div align="center">
 
+ Hecho con ❤️ por Lilliana Uribe
+
+[⬆ Volver al inicio](#🫀-cardiovascular-risk-prediction-with-datarobot)
+
+</div>
+"""
  Hecho con ❤️ por Lilliana Uribe
 
 [⬆ Volver al inicio](#🫀-cardiovascular-risk-prediction-with-datarobot)
